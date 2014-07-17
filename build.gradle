@@ -1,0 +1,53 @@
+apply plugin: "java"
+apply plugin: "application"
+
+repositories {
+  maven { url "http://build-squid.eng.vmware.com/nexus/content/groups/repo" }
+  maven { url "http://build-maven-repo.eng.vmware.com:8081/nexus/content/groups/repo" }
+  mavenCentral()
+}
+
+dependencies {
+  compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.3.4'
+  testCompile group: 'com.typesafe.akka', name: 'akka-testkit_2.11', version: '2.3.4'
+  testCompile group: 'org.testng', name: 'testng', version: '6.8.8'
+  // testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+run {
+  mainClassName = "com.vmware.dbaas.HelloAkkaJava"
+  // mainClassName = "com.vmware.dbaas.Main1"
+  // applicationDefaultJvmArgs = ["-Dgreeting.language=en"]
+}
+
+test {
+  // enable TestNG support (default is JUnit)
+  useTestNG()
+
+  // set a system property for the test JVM(s)
+  // systemProperty 'some.prop', 'value'
+
+  // explicitly include or exclude tests
+  // include 'org/foo/**'
+  // exclude 'org/boo/**'
+
+  // show standard out and standard error of the test JVM(s) on the console
+  testLogging.showStandardStreams = true
+
+  // set heap size for the test JVM(s)
+  minHeapSize = "128m"
+  // maxHeapSize = "512m"
+
+  // set JVM arguments for the test JVM(s)
+  jvmArgs '-XX:MaxPermSize=256m'
+
+  // listen to events in the test execution lifecycle
+  beforeTest { descriptor ->
+     logger.lifecycle("Running test: " + descriptor)
+  }
+
+  // listen to standard out and standard error of the test JVM(s)
+  onOutput { descriptor, event ->
+     logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+  }
+}
