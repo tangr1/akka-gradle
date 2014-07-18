@@ -2,7 +2,7 @@
 
 Install the following tools before you continue.
 
-   * [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+   * [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
    * [Gradle](http://www.gradle.org/): for mac just run "brew install gradle" to install
 
 ## Quick Start
