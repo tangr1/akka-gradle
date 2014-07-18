@@ -7,6 +7,6 @@ Install the following tools before you continue.
 
 ## Quick Start
 
-    grade build -- builde the code
-    grade run -- run main class
+    gradle build -- builde the code
+    gradle run -- run main class
     gradle test -- run unit test
